@@ -23,7 +23,11 @@ export default function App() {
     <View style={styles.screen}>
       <InputCustom addWordHandler={addWordHandler} />
       <FlatList data={wordList}
-        renderItem={itemData => <Item id={itemData.item.key} onDelete={removeElement} value={itemData.item.value} />
+        renderItem={itemData =>
+          <Item
+            id={itemData.item.key}
+            onDelete={removeElement}
+            value={itemData.item.value} />
         }
       />
     </View>
