@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View , ScrollView, FlatList} from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View, ScrollView, FlatList } from 'react-native';
 import InputCustom from './components/InputCustom';
 import Item from './components/Item';
 
@@ -10,10 +10,10 @@ export default function App() {
 
   const addWordHandler = word => {
     console.log(word);
-    setWordList(currentList => [...currentList, {key: Math.random().toString(),value: word}]);
+    setWordList(currentList => [...currentList, { key: Math.random().toString(), value: word }]);
   }
 
-  const removeElement = id =>{
+  const removeElement = id => {
     setWordList(currentList => {
       return currentList.filter((item) => item.key !== id)
     })
@@ -22,10 +22,10 @@ export default function App() {
   return (
     <View style={styles.screen}>
       <InputCustom addWordHandler={addWordHandler} />
-      <FlatList data={wordList} 
-        renderItem={itemData =><Item id={itemData.item.key} onDelete={removeElement} value={itemData.item.value} />
-         }
-         />
+      <FlatList data={wordList}
+        renderItem={itemData => <Item id={itemData.item.key} onDelete={removeElement} value={itemData.item.value} />
+        }
+      />
     </View>
   );
 }
