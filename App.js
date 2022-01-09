@@ -1,17 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
+import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
+
+  const [word, setWord] = useState('');
+  const [wordList, setWordList] = useState([]);
+
+  const wordInputHandler = (text) => {
+    setWord(text);
+  }
+
+  const addWordHandler = () => {
+    console.log(word);
+    setWordList(currentList => [...currentList, word]);
+  }
+
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
         <TextInput
           placeholder='Enter Word'
+          onChangeText={wordInputHandler}
           style={styles.inputStyle} />
-        <Button title="ADD" />
+        <Button title="ADD" onPress={addWordHandler} />
       </View>
-      <View style={styles.container}>
-
+      <View>
+        {wordList.map((word) => (
+          <View key={word} style={styles.item}>
+            <Text >{word}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -31,5 +50,12 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1,
     padding: 10
+  },
+  item: {
+    padding: 10,
+    marginVertical: 5,
+    backgroundColor: '#ccc',
+    borderColor: 'black',
+    borderWidth: 1
   }
 })
