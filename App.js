@@ -1,35 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View , ScrollView, FlatList} from 'react-native';
+import InputCustom from './components/InputCustom';
+import Item from './components/Item';
 
 export default function App() {
 
-  const [word, setWord] = useState('');
   const [wordList, setWordList] = useState([]);
 
-  const wordInputHandler = (text) => {
-    setWord(text);
-  }
-
-  const addWordHandler = () => {
+  const addWordHandler = word => {
     console.log(word);
     setWordList(currentList => [...currentList, {key: Math.random().toString(),value: word}]);
   }
 
+  const removeElement = id =>{
+    setWordList(currentList => {
+      return currentList.filter((item) => item.key !== id)
+    })
+  }
+
   return (
     <View style={styles.screen}>
-      <View style={styles.container}>
-        <TextInput
-          placeholder='Enter Word'
-          onChangeText={wordInputHandler}
-          style={styles.inputStyle} />
-        <Button title="ADD" onPress={addWordHandler} />
-      </View>
+      <InputCustom addWordHandler={addWordHandler} />
       <FlatList data={wordList} 
-        renderItem={itemData =>
-          <View style={styles.item}>
-          <Text >{itemData.item.value}</Text>
-        </View>
+        renderItem={itemData =><Item id={itemData.item.key} onDelete={removeElement} value={itemData.item.value} />
          }
          />
     </View>
@@ -51,11 +45,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10
   },
-  item: {
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: '#ccc',
-    borderColor: 'black',
-    borderWidth: 1
-  }
+
 })
