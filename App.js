@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View , ScrollView} from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View , ScrollView, FlatList} from 'react-native';
 
 export default function App() {
 
@@ -13,7 +13,7 @@ export default function App() {
 
   const addWordHandler = () => {
     console.log(word);
-    setWordList(currentList => [...currentList, word]);
+    setWordList(currentList => [...currentList, {key: Math.random().toString(),value: word}]);
   }
 
   return (
@@ -25,13 +25,13 @@ export default function App() {
           style={styles.inputStyle} />
         <Button title="ADD" onPress={addWordHandler} />
       </View>
-      <ScrollView>
-        {wordList.map((word) => (
-          <View key={word} style={styles.item}>
-            <Text >{word}</Text>
-          </View>
-        ))}
-      </ScrollView>
+      <FlatList data={wordList} 
+        renderItem={itemData =>
+          <View style={styles.item}>
+          <Text >{itemData.item.value}</Text>
+        </View>
+         }
+         />
     </View>
   );
 }
