@@ -3,18 +3,33 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={{ padding: 40 }}>
-      <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+    <View style={styles.screen}>
+      <View style={styles.container}>
         <TextInput
           placeholder='Enter Word'
-          style={{ width:'80%', borderColor: 'black', borderWidth: 1, padding: 10 }} />
+          style={styles.inputStyle} />
         <Button title="ADD" />
       </View>
-      <View>
+      <View style={styles.container}>
 
       </View>
     </View>
   );
 }
 
-
+const styles = StyleSheet.create({
+  screen: {
+    padding: 40
+  },
+  container: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  inputStyle: {
+    width: '80%',
+    borderColor: 'black',
+    borderWidth: 1,
+    padding: 10
+  }
+})
