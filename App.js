@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View , ScrollView} from 'react-native';
 
 export default function App() {
 
@@ -25,13 +25,13 @@ export default function App() {
           style={styles.inputStyle} />
         <Button title="ADD" onPress={addWordHandler} />
       </View>
-      <View>
+      <ScrollView>
         {wordList.map((word) => (
           <View key={word} style={styles.item}>
             <Text >{word}</Text>
           </View>
         ))}
-      </View>
+      </ScrollView>
     </View>
   );
 }
